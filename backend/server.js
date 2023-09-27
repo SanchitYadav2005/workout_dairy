@@ -5,6 +5,7 @@ const app = express();
 const workoutsRoutes = require('./routes/workouts');
 
 
+
 app.use(express.json())
 //middleware for logging out the path, and request method
 app.use((req,res,next)=>{
