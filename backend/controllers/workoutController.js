@@ -11,7 +11,7 @@ const getWorkouts = async (req,res)=>{
 
 const getWorkout = async (req,res)=>{
     const {id} = req.params;
-    const workout = await Workout.findOne(id)
+    const workout = await Workout.findById(id)
 
     if(!workout){
         res.status(404).json({messg: "no such workout found"})
