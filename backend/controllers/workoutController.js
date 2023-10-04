@@ -18,7 +18,7 @@ const getWorkout = async (req,res)=>{
     const workout = await Workout.findById(id)
 
     if(!workout){
-        res.status(404).json({messg: "no such workout found"})
+        res.status(404).json({messg: "no such workout found", emptyFields})
     }
 
     res.status(200).json(workout)
@@ -27,8 +27,22 @@ const getWorkout = async (req,res)=>{
 // create workout 
 
 const createWorkout = async (req,res)=>{
+    const {title,reps,load} = req.body;
+    let emptyFields = []
+    if(!title){
+        emptyFields.push('title')
+    }
+    if(!reps){
+        emptyFields.push('reps')
+    }
+    if(!load){
+        emptyFields.push('load')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'please fill all the fields.'})
+    }
     try{
-        const {title,reps,load} = req.body;
+        
         const workout = await Workout.create({title,reps,load})
         res.status(200).json(workout)
     }
