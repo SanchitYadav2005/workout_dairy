@@ -1,27 +1,28 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 //components
-import WorkOutDetails from "../components/WorkoutDetails";
+import WorkoutDetails from "../components/WorkoutDetails";
+import useWorkoutsContext from '../hooks/useWorkoutsContext'
 
 function Home() {
-  const [workouts, setWorkouts] = useState(null);
+  const{workouts, dispatch} = useWorkoutsContext()
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios("/api/workouts");
+      const res = await axios.get("/api/workouts");
       const json = await res.json();
       if (res.ok) {
-        setWorkouts(json);
+        dispatch({type: "SET_WORKOUTS", payload: json})
       }
     };
     getData();
-  }, []);
+  },[dispatch]);
   return (
     <div className="home">
       <div className="workouts">
         {workouts &&
           workouts.map((workout) => (
-            <WorkOutDetails workout={workout} key={workout._id} />
+            <WorkoutDetails workout={workout} key={workout._id} />
           ))}
       </div>
     </div>
