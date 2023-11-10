@@ -14,6 +14,10 @@ const workoutSchema = new Schema({
     load:{
         type: Number,
         required: true
+    },
+    user_id:{
+        type: String,
+        required: true
     }
     // timestamps gives us time of creation or updation.
 }, {timestamps:true});
