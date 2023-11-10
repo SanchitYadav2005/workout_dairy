@@ -1,5 +1,6 @@
 import useWorkoutsContext from "../hooks/useWorkoutsContext"
 
+// eslint-disable-next-line react/prop-types
 function WorkOutDetails({ workout }) {
   const { dispatch } = useWorkoutsContext()
 
